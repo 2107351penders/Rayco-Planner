@@ -5,7 +5,9 @@ namespace RaycoPlannerSPAM
 {
     public class DatabaseConnection
     {
-        SQLiteConnection connection = new SQLiteConnection("Data Source=database.db; Version = 3; Compress = True;");
+        private static string dbname = "database.db";
+
+        SQLiteConnection connection = new SQLiteConnection($"Data Source={dbname}; Version = 3; Compress = True;");
 
         /* Open de verbinding naar de database
          * 
@@ -48,6 +50,11 @@ namespace RaycoPlannerSPAM
             
             if (wachtwoord == password) return true;
             else return false;
+        }
+
+        public void setConnectionString(string connectionString)
+        {
+            dbname = connectionString;
         }
     }
 }

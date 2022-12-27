@@ -15,6 +15,8 @@ namespace RaycoPlannerSPAM
 
         private void inloggenKnop_Click(object sender, EventArgs e)
         {
+            databaseConnection.setConnectionString(textBox1.Text);
+
             if (databaseConnection.loginGebruiker(naamBox.Text, wachtwoordBox.Text))
             {
                 foreach (Projectlid projectlid in projectleden)
@@ -47,6 +49,11 @@ namespace RaycoPlannerSPAM
         }
 
         private void naamBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }
