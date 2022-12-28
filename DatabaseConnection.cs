@@ -1,15 +1,30 @@
 ﻿using System.Data.SQLite;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace RaycoPlannerSPAM
 {
-    public class DatabaseConnection
+    public sealed class DatabaseConnection
     {
-        private static string dbname = "database.db";
+        private static DatabaseConnection _instance;
+        public static string dbname = "database.db";
 
         SQLiteConnection connection = new SQLiteConnection($"Data Source={dbname}; Version = 3; Compress = True;");
 
-        /* Open de verbinding naar de database
+        private DatabaseConnection() { }
+
+        public static DatabaseConnection GetInstance()
+        {
+            if (_instance == null)
+                _instance = new DatabaseConnection();
+            return _instance;
+        }
+
+        // 
+
+        
+
+        /* Open de verbinding naar de databasedb
          * 
          * Geeft /true/ als de verbinding succesvol geopend is
          * 

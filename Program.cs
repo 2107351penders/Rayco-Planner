@@ -21,7 +21,7 @@ namespace RaycoPlannerSPAM
 
             // Maak verbinding met de database
             // TODO
-            DatabaseConnection databaseConnection = new DatabaseConnection();
+            DatabaseConnection databaseConnection = DatabaseConnection.GetInstance();
             if (databaseConnection.openDatabaseConnection())
             {
                 Console.WriteLine("Verbonden met database");
