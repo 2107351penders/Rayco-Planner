@@ -5,7 +5,7 @@ namespace RaycoPlannerSPAM
         [STAThread]
         static void Main()
         {
-            HRConnection hrConnection = new HRConnection("http://127.0.0.1:8008");
+            HRConnection hrConnection = HRConnection.GetInstance();
 
             // Haal projectleden op uit HR systeem
             List<Projectlid>? projectleden = hrConnection.getProjectleden();

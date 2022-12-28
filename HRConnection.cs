@@ -1,9 +1,21 @@
-﻿using System.Text.Json;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Text.Json;
 
 namespace RaycoPlannerSPAM
 {
-    internal class HRConnection
+    public sealed class HRConnection
     {
+        private static HRConnection _instance;
+        private HRConnection() { } 
+
+        public static HRConnection GetInstance()
+        {
+            if (_instance == null)
+                _instance = new HRConnection("http://127.0.0.1:8008");
+        return _instance;
+        }
+        
+
         private readonly HttpClient client = new HttpClient();
 
         private string baseURL;
