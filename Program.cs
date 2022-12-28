@@ -10,10 +10,11 @@ namespace RaycoPlannerSPAM
             // Haal projectleden op uit HR systeem
             List<Projectlid>? projectleden = hrConnection.getProjectleden();
 
-            if (projectleden == null)
+            while (projectleden == null)
             {
-                Console.WriteLine("Communicatiefout met HR tool");
-                return;
+                MessageBox.Show("Communicatiefout met HR tool. Zorg dat deze actief is en bereikbaar is via http://127.0.0.1:8008", "HR systeem communicatiefout",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                projectleden = hrConnection.getProjectleden();
             }
 
             List<ProjectSoort> projectsoorten = new List<ProjectSoort>();
