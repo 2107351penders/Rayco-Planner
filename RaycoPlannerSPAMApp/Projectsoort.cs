@@ -59,12 +59,12 @@
          * Geeft /false/ terug wanneer deeltaak niet bestaat binnen deze
          * projectsoort
          */
-        public bool wijzigDeeltaak(Deeltaak deeltaak, string beschrijving, string rol, int tijdInDagen, Deeltaak voorgaandeTaak)
+        public bool wijzigDeeltaak(Deeltaak deeltaak, string beschrijving, string rol, int minimaleTijdInDagen, int maximaleTijdInDagen, Deeltaak voorgaandeTaak)
         {
             if (deelTaken.Contains(deeltaak))
             {
                 deelTaken.Remove(deeltaak);
-                Deeltaak gewijzigdeDeeltaak = new Deeltaak(beschrijving, deeltaak.id, tijdInDagen, rol, voorgaandeTaak);
+                Deeltaak gewijzigdeDeeltaak = new Deeltaak(beschrijving, deeltaak.id, minimaleTijdInDagen, maximaleTijdInDagen, rol, voorgaandeTaak);
                 deelTaken.Add(gewijzigdeDeeltaak);
                 return true;
             }
@@ -81,11 +81,11 @@
         {
             if (deeltaak.voorgaandeTaak == null) // deelTaak staat los. Dus TakenDuur == duur van deze taak
             {
-                return deeltaak.tijdInDagen;
+                return deeltaak.minimaleTijdInDagen;
             }
             else // Taak heeft voorgaande taken. Dus TakenDuur == duur van deze taak + duur van voorgaande taken
             {
-                return deeltaak.tijdInDagen + getTakenDuur(deeltaak.voorgaandeTaak);
+                return deeltaak.minimaleTijdInDagen + getTakenDuur(deeltaak.voorgaandeTaak);
             }
         }
 
@@ -124,7 +124,7 @@
 
             foreach (Deeltaak deelTaak in deelTaken)
             {
-                totaalUren += deelTaak.tijdInDagen;
+                totaalUren += deelTaak.minimaleTijdInDagen;
             }
 
             return totaalUren;
