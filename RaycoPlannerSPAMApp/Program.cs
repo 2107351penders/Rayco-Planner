@@ -36,7 +36,7 @@ namespace RaycoPlannerSPAM
 
             // Voeg twee taken toe die alleen opeenvolgend uit te voeren zijn
             Deeltaak maakOntwerp = new Deeltaak("Maak een ontwerp van de code", 0, 2, 4, "Software architect", null);
-            Deeltaak schrijfCode = new Deeltaak("Schrijf de code", 1, 3, 5, "Programmeur", maakOntwerp);
+            Deeltaak schrijfCode = new Deeltaak("Schrijf de code", 1, 3, 5, "Programmeur", new List<Deeltaak> { maakOntwerp });
 
             // Voeg een losstaande taak toe
             Deeltaak schrijfTests = new Deeltaak("Schrijf unit tests", 2, 3, 5, "Tester", null);

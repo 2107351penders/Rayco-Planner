@@ -59,7 +59,7 @@
          * Geeft /false/ terug wanneer deeltaak niet bestaat binnen deze
          * projectsoort
          */
-        public bool wijzigDeeltaak(Deeltaak deeltaak, string beschrijving, string rol, int minimaleTijdInDagen, int maximaleTijdInDagen, Deeltaak voorgaandeTaak)
+        public bool wijzigDeeltaak(Deeltaak deeltaak, string beschrijving, string rol, int minimaleTijdInDagen, int maximaleTijdInDagen, List<Deeltaak>? voorgaandeTaak)
         {
             if (deelTaken.Contains(deeltaak))
             {
@@ -85,7 +85,7 @@
             }
             else // Taak heeft voorgaande taken. Dus TakenDuur == duur van deze taak + duur van voorgaande taken
             {
-                return deeltaak.minimaleTijdInDagen + getTakenDuur(deeltaak.voorgaandeTaak);
+                return deeltaak.minimaleTijdInDagen + 0;
             }
         }
 

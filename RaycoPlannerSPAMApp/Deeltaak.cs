@@ -6,9 +6,9 @@
         public int minimaleTijdInDagen { get; private set; }
         public int maximaleTijdInDagen { get; private set; }
         public string rol { get; private set; }
-        public Deeltaak? voorgaandeTaak { get; private set; } = null;
+        public List<Deeltaak>? voorgaandeTaak { get; private set; } = null;
 
-        public Deeltaak(string beschrijving, int id, int minimaletijdInDagen, int maximaleTijdInDagen, string rol, Deeltaak? voorgaandeTaak)
+        public Deeltaak(string beschrijving, int id, int minimaletijdInDagen, int maximaleTijdInDagen, string rol, List<Deeltaak>? voorgaandeTaak)
         {
             this.beschrijving = beschrijving;
             this.id = id;
