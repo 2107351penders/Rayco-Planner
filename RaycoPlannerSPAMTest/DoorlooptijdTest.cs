@@ -2,7 +2,7 @@ using RaycoPlannerSPAM;
 
 namespace RaycoPlannerSPAMTest
 {
-    public class TestTestClassClass
+    public class DoorlooptijdTest
     {
         private ProjectSoort projectSoort;
         private string projectSoortNaam = "Test project";
