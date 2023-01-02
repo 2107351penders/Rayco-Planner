@@ -9,13 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.116" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="AdminScherm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.117" />
   </ItemGroup>
 
 </Project>
