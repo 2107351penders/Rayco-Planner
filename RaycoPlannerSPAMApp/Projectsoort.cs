@@ -71,6 +71,18 @@
             else return false;
         }
 
+        /* Check of er taken zijn die naar elkaar verwijzen en zo een lus
+         * vormen
+         * 
+         * Geeft /true/ als deze ProjectSoort deze situatie bevat
+         * 
+         * Geeft /false/ terug wanneer dit niet zo is
+         */
+        public bool CheckLus()
+        {
+            return false;
+        }
+
         /* Berekent de de duur van een (opeenvolging van) deeltaak
          * 
          * Geeft een integer getal terug. Dit getal is de som van de
