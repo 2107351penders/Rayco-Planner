@@ -100,46 +100,24 @@ namespace RaycoPlannerSPAM
             return false;
         }
 
-        /* Berekent de de duur van een (opeenvolging van) deeltaak
+        /* Berekent de minimale doorlooptijd van alle deeltaken
          * 
-         * Geeft een integer getal terug. Dit getal is de som van de
-         * duur van deeltaak + voorgaande taken OF de duur van deeltaak
-         * als deze geen voorgaande taken heeft
+         * Geeft een integer getal terug. Dit is de som van de minimale
+         * doorlooptijden van de langste keten deeltaken
          */
-        private int getTakenDuur(Deeltaak deeltaak)
+        public int berekenMinimaleDoorlooptijd()
         {
-            if (deeltaak.voorgaandeTaak == null) // deelTaak staat los. Dus TakenDuur == duur van deze taak
-            {
-                return deeltaak.minimaleTijdInDagen;
-            }
-            else // Taak heeft voorgaande taken. Dus TakenDuur == duur van deze taak + duur van voorgaande taken
-            {
-                return deeltaak.minimaleTijdInDagen + 0;
-            }
+            return 0;
         }
 
-       /* Berekent de doorlooptijd van deze projectsoort
-        * 
-        * De doorlooptijd is gelijk aan de totale duur
-        * van de langste opeenvolging van taken OF, als een losse taak
-        * langer duurt dan de langste opeenvolgende reeks van taken, de duur
-        * van deze taak
-        * 
-        * Geeft een integer getal. Dit getal is de doorlooptijd
-        * van deze projectsoort
-        */
-        public int berekenDoorlooptijd()
+        /* Berekent de maximale doorlooptijd van alle deeltaken
+         * 
+         * Geeft een integer getal terug. Dit is de som van de maximale
+         * doorlooptijden van de langste keten deeltaken
+         */
+        public int berekenMaximaleDoorlooptijd()
         {
-            int doorlooptijd = 0;
-
-            foreach (Deeltaak deeltaak in deelTaken)
-            {
-                int tijdsduur = getTakenDuur(deeltaak);
-                
-                if (tijdsduur > doorlooptijd) doorlooptijd = tijdsduur;
-            }
-
-            return doorlooptijd;
+            return 0;
         }
 
         /* Berekent de som van de duur van alle deeltaken 
