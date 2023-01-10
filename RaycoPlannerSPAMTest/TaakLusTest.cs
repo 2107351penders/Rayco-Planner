@@ -21,11 +21,17 @@ namespace RaycoPlannerSPAMTest
             taak1 = new Deeltaak("Taak 1", 1, 2, 4, "Projectmedewerker", null);
             taak2 = new Deeltaak("Taak 2", 2, 2, 4, "Projectmedewerker", new List<Deeltaak> { taak1 });
             taak3 = new Deeltaak("Taak 3", 3, 2, 4, "Projectmedewerker", new List<Deeltaak> { taak2 });
+            projectSoortZonderLus.addDeeltaak(taak1);
+            projectSoortZonderLus.addDeeltaak(taak2);
+            projectSoortZonderLus.addDeeltaak(taak3);
 
             // Dit project bestaat uit 2 taken die elkaar als voorgaande taak hebben. Dit is dus een lus.
             projectSoortMetLus = new ProjectSoort("Project met lus");
-            taak4 = new Deeltaak("Taak 4", 4, 2, 4, "Projectmedewerker", new List<Deeltaak> { taak5 });
+            taak4 = new Deeltaak("Taak 4", 4, 2, 4, "Projectmedewerker", new List<Deeltaak> ());
             taak5 = new Deeltaak("Taak 5", 5, 2, 4, "Projectmedewerker", new List<Deeltaak> { taak4 });
+            taak4.voorgaandeTaak.Add(taak5);
+            projectSoortMetLus.addDeeltaak(taak4);
+            projectSoortMetLus.addDeeltaak(taak5);
         }
 
         [Test]

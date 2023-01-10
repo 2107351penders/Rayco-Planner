@@ -1,4 +1,6 @@
-﻿namespace RaycoPlannerSPAM
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace RaycoPlannerSPAM
 {
     public class ProjectSoort
     {
@@ -80,6 +82,21 @@
          */
         public bool CheckLus()
         {
+            foreach (Deeltaak taak in deelTaken)
+            {
+                if (taak.voorgaandeTaak == null)
+                {
+                    continue;
+                }
+
+                foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+                {
+                    foreach (Deeltaak voorVoorgaandeTaak in voorgaandeTaak.voorgaandeTaak)
+                    {
+                        if (voorVoorgaandeTaak.id == taak.id) return true;
+                    }
+                }
+            }
             return false;
         }
 
