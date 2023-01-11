@@ -103,28 +103,57 @@ namespace RaycoPlannerSPAM
 
         private int getMinimaleDoorlooptijd(Deeltaak taak)
         {
-            if (taak.voorgaandeTaak.Count == 0) return taak.minimaleTijdInDagen;
-
             int minimaleDoorloopTijd = taak.minimaleTijdInDagen;
-
-            foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+            if (taak.voorgaandeTaak.Count == 0) return minimaleDoorloopTijd;
+            else if (taak.voorgaandeTaak.Count == 1)
             {
-                minimaleDoorloopTijd += getMinimaleDoorlooptijd(voorgaandeTaak);
+                foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+                {
+                    minimaleDoorloopTijd += getMinimaleDoorlooptijd(voorgaandeTaak);
+                }
+                return minimaleDoorloopTijd;
             }
-            return minimaleDoorloopTijd;
+            else
+            {
+                int langsteKeten = 0;
+                int ketenDuur = 0;
+                foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+                {
+                    ketenDuur = getMinimaleDoorlooptijd(voorgaandeTaak);
+                    if (ketenDuur >= langsteKeten)
+                    {
+                        langsteKeten = ketenDuur;
+                    }
+                }
+                return langsteKeten + minimaleDoorloopTijd;
+            }
         }
-
         private int getMaximaleDoorlooptijd(Deeltaak taak)
         {
-            if (taak.voorgaandeTaak.Count == 0) return taak.maximaleTijdInDagen;
-
-            int maximaleDoorloopTijd = 0;
-
-            foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+            int maximaleDoorloopTijd = taak.maximaleTijdInDagen;
+            if (taak.voorgaandeTaak.Count == 0) return maximaleDoorloopTijd;
+            else if (taak.voorgaandeTaak.Count == 1)
             {
-                maximaleDoorloopTijd += getMaximaleDoorlooptijd(voorgaandeTaak);
+                foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+                {
+                    maximaleDoorloopTijd += getMaximaleDoorlooptijd(voorgaandeTaak);
+                }
+                return maximaleDoorloopTijd;
             }
-            return maximaleDoorloopTijd;
+            else
+            {
+                int langsteKeten = 0;
+                int ketenDuur = 0;
+                foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+                {
+                    ketenDuur = getMaximaleDoorlooptijd(voorgaandeTaak);
+                    if (ketenDuur >= langsteKeten)
+                    {
+                        langsteKeten = ketenDuur;
+                    }
+                }
+                return langsteKeten + maximaleDoorloopTijd;
+            }
         }
 
         /* Berekent de minimale doorlooptijd van alle deeltaken

@@ -87,6 +87,11 @@ namespace RaycoPlannerSPAMTest
             Deeltaak simpelTaak1 = new Deeltaak("", 1, 2, 3, "Student", new List<Deeltaak>());
             Deeltaak simpelTaak2 = new Deeltaak("", 2, 1, 2, "Student", new List<Deeltaak>());
             Deeltaak simpelTaak3 = new Deeltaak("", 3, 1, 2, "Student", new List<Deeltaak>());
+            Deeltaak simpelTaak4 = new Deeltaak("", 4, 5, 8, "Student", new List<Deeltaak>());
+            Deeltaak simpelTaak5 = new Deeltaak("", 5, 3, 4, "Student", new List<Deeltaak>());
+
+            simpelTaak5.voorgaandeTaak.Add(simpelTaak3);
+            simpelTaak5.voorgaandeTaak.Add(simpelTaak4);
 
             simpelTaak3.voorgaandeTaak.Add(simpelTaak1);
             simpelTaak3.voorgaandeTaak.Add(simpelTaak2);
@@ -94,19 +99,21 @@ namespace RaycoPlannerSPAMTest
             simpelProjectSoort.addDeeltaak(simpelTaak1);
             simpelProjectSoort.addDeeltaak(simpelTaak2);
             simpelProjectSoort.addDeeltaak(simpelTaak3);
+            simpelProjectSoort.addDeeltaak(simpelTaak4);
+            simpelProjectSoort.addDeeltaak(simpelTaak5);
         }
 
         // Het simpele project heeft een minimale doorlooptijd van 3 en een maximale doorlooptijd van 5
         [Test]
         public void simpelBerekenMinimaleDoorlooptijdTest()
         {
-            Assert.That(simpelProjectSoort.berekenMinimaleDoorlooptijd(), Is.EqualTo(3));
+            Assert.That(simpelProjectSoort.berekenMinimaleDoorlooptijd(), Is.EqualTo(8));
         }
 
         [Test]
         public void simpelBerekenMaximaleDoorlooptijdTest()
         {
-            Assert.That(simpelProjectSoort.berekenMaximaleDoorlooptijd(), Is.EqualTo(5));
+            Assert.That(simpelProjectSoort.berekenMaximaleDoorlooptijd(), Is.EqualTo(12));
         }
 
         /* We hebben met de hand berekent dat het project een minimale doorlooptijd heeft van 41 dagen en een
