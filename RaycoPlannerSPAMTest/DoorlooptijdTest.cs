@@ -6,6 +6,7 @@ namespace RaycoPlannerSPAMTest
     {
         private ProjectSoort projectSoort;
         private string projectSoortNaam = "Test project conform PI8 opdracht 7";
+        private ProjectSoort simpelProjectSoort;
         [SetUp]
         public void Setup()
         {
@@ -62,15 +63,64 @@ namespace RaycoPlannerSPAMTest
             taak14.voorgaandeTaak.Add(taak11);
             taak14.voorgaandeTaak.Add(taak12);
             taak14.voorgaandeTaak.Add(taak13);
+
+            // Als laatste voegen we alle taken toe aan onze projectsoort
+            projectSoort.addDeeltaak(taak1);
+            projectSoort.addDeeltaak(taak2);
+            projectSoort.addDeeltaak(taak3);
+            projectSoort.addDeeltaak(taak4);
+            projectSoort.addDeeltaak(taak5);
+            projectSoort.addDeeltaak(taak6);
+            projectSoort.addDeeltaak(taak7);
+            projectSoort.addDeeltaak(taak8);
+            projectSoort.addDeeltaak(taak9);
+            projectSoort.addDeeltaak(taak10);
+            projectSoort.addDeeltaak(taak11);
+            projectSoort.addDeeltaak(taak12);
+            projectSoort.addDeeltaak(taak13);
+            projectSoort.addDeeltaak(taak14);
+
+
+            // We maken ook een simpel project voor een eenvoudigere test
+            simpelProjectSoort = new ProjectSoort("Eenvoudig project");
+            
+            Deeltaak simpelTaak1 = new Deeltaak("", 1, 2, 3, "Student", new List<Deeltaak>());
+            Deeltaak simpelTaak2 = new Deeltaak("", 2, 1, 2, "Student", new List<Deeltaak>());
+            Deeltaak simpelTaak3 = new Deeltaak("", 3, 1, 2, "Student", new List<Deeltaak>());
+
+            simpelTaak3.voorgaandeTaak.Add(simpelTaak1);
+            simpelTaak3.voorgaandeTaak.Add(simpelTaak2);
+
+            simpelProjectSoort.addDeeltaak(simpelTaak1);
+            simpelProjectSoort.addDeeltaak(simpelTaak2);
+            simpelProjectSoort.addDeeltaak(simpelTaak3);
+        }
+
+        // Het simpele project heeft een minimale doorlooptijd van 3 en een maximale doorlooptijd van 5
+        [Test]
+        public void simpelBerekenMinimaleDoorlooptijdTest()
+        {
+            Assert.That(simpelProjectSoort.berekenMinimaleDoorlooptijd(), Is.EqualTo(3));
         }
 
         [Test]
-        public void TestTest()
+        public void simpelBerekenMaximaleDoorlooptijdTest()
         {
-            /* We hebben met de hand berekent dat het project een minimale doorlooptijd heeft van 41 dagen en een
-             * maximale doorlooptijd van 66 dagen.
-             */
-            Assert.That(projectSoort.berekenMinimaleDoorlooptijd(), Is.EqualTo(41));
+            Assert.That(simpelProjectSoort.berekenMaximaleDoorlooptijd(), Is.EqualTo(5));
+        }
+
+        /* We hebben met de hand berekent dat het project een minimale doorlooptijd heeft van 41 dagen en een
+         * maximale doorlooptijd van 66 dagen.
+         */
+        [Test]
+        public void BerekenMinimaleDoorlooptijdTest()
+        {
+            Assert.That(projectSoort.berekenMinimaleDoorlooptijd(), Is.EqualTo(41));   
+        }
+
+        [Test]
+        public void berekenMaximaleDoorlooptijdTest()
+        {
             Assert.That(projectSoort.berekenMaximaleDoorlooptijd(), Is.EqualTo(66));
         }
     }

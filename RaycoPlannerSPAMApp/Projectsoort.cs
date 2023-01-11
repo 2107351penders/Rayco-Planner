@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
 
 namespace RaycoPlannerSPAM
 {
@@ -84,7 +85,7 @@ namespace RaycoPlannerSPAM
         {
             foreach (Deeltaak taak in deelTaken)
             {
-                if (taak.voorgaandeTaak == null)
+                if (taak.voorgaandeTaak.Count == 0)
                 {
                     continue;
                 }
@@ -100,6 +101,32 @@ namespace RaycoPlannerSPAM
             return false;
         }
 
+        private int getMinimaleDoorlooptijd(Deeltaak taak)
+        {
+            if (taak.voorgaandeTaak.Count == 0) return taak.minimaleTijdInDagen;
+
+            int minimaleDoorloopTijd = taak.minimaleTijdInDagen;
+
+            foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+            {
+                minimaleDoorloopTijd += getMinimaleDoorlooptijd(voorgaandeTaak);
+            }
+            return minimaleDoorloopTijd;
+        }
+
+        private int getMaximaleDoorlooptijd(Deeltaak taak)
+        {
+            if (taak.voorgaandeTaak.Count == 0) return taak.maximaleTijdInDagen;
+
+            int maximaleDoorloopTijd = 0;
+
+            foreach (Deeltaak voorgaandeTaak in taak.voorgaandeTaak)
+            {
+                maximaleDoorloopTijd += getMaximaleDoorlooptijd(voorgaandeTaak);
+            }
+            return maximaleDoorloopTijd;
+        }
+
         /* Berekent de minimale doorlooptijd van alle deeltaken
          * 
          * Geeft een integer getal terug. Dit is de som van de minimale
@@ -107,7 +134,16 @@ namespace RaycoPlannerSPAM
          */
         public int berekenMinimaleDoorlooptijd()
         {
-            return 0;
+            int minimaleDoorloopTijd = 0;
+
+            foreach (Deeltaak taak in deelTaken)
+            {
+                if (getMinimaleDoorlooptijd(taak) >= minimaleDoorloopTijd)
+                {
+                    minimaleDoorloopTijd = getMinimaleDoorlooptijd(taak);
+                }
+            }
+            return minimaleDoorloopTijd;
         }
 
         /* Berekent de maximale doorlooptijd van alle deeltaken
@@ -117,7 +153,16 @@ namespace RaycoPlannerSPAM
          */
         public int berekenMaximaleDoorlooptijd()
         {
-            return 0;
+            int maximaleDoorloopTijd = 0;
+
+            foreach (Deeltaak taak in deelTaken)
+            {
+                if (getMaximaleDoorlooptijd(taak) > maximaleDoorloopTijd)
+                {
+                    maximaleDoorloopTijd = getMaximaleDoorlooptijd(taak);
+                }
+            }
+            return maximaleDoorloopTijd;
         }
 
         /* Berekent de som van de duur van alle deeltaken 

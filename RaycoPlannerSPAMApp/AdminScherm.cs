@@ -40,7 +40,7 @@ namespace RaycoPlannerSPAM
 
         private void doorlooptijdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int doorlooptijd = geselecteerdProject.projectSoort.berekenDoorlooptijd();
+            int doorlooptijd = geselecteerdProject.projectSoort.berekenMinimaleDoorlooptijd();
             Program.WriteLineToTextbox(richTextBox1, $"De doorlooptijd van dit project is {doorlooptijd} dagen");
         }
 
